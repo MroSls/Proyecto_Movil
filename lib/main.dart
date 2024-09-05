@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'pages/home.dart';
 import 'pages/builds.dart';
-import 'pages/components.dart'; // Asegúrate de importar components.dart
+import 'pages/components.dart';
+import 'pages/buildyourpc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           title: '',
           description: '',
         ),
+        '/buildyourpc': (context) => BuildYourPC(),
       },
     );
   }

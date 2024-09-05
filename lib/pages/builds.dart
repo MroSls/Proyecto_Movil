@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components.dart'; // Actualiza la importación a components.dart
+import 'components.dart';
 
 class Builds extends StatefulWidget {
   const Builds({super.key});

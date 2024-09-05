@@ -35,7 +35,11 @@ class HomePage extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/builds');
+                if (labels[index] == 'armar pc') {
+                  Navigator.pushNamed(context, '/buildyourpc');
+                } else {
+                  Navigator.pushNamed(context, '/builds');
+                }
               },
               child: Container(
                 height: 250,
