@@ -8,10 +8,15 @@ uri = uri.replace('<target>', process.env.DB_TARGET);
 
 const connectToDataBase = async (uri) => {
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 10000
+        });
         console.log('Conexion exitosa a la BD.');
     } catch (error) {
-        console.log();
+        console.log('Error al conectar a la DB:', error.message);
+        process.exit(1);
     }
 };
 
