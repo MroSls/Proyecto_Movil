@@ -20,16 +20,28 @@ const addAssembledPC = async (req, res) => {
 
 const updateAssembledPC = async (req, res) => {
     try {
-        const updateAssembledPC = await assembledPCService.updateAssembledPC(req.body);
-
-        if (!updateAssembledPC) {
-            return res.status(404).json({ message: 'No se ha encontrado la PC armada'})
+        const updatedAssembledPC = await assembledPCService.updateAssembledPC(req.body);
+        if (!updatedAssembledPC) {
+            return res.status(404).json({ message: 'No se ha encontrado la PC armada' })
         }
 
-        res.status(200).json({ updateAssembledPC });
+        res.status(200).json({ updatedAssembledPC });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
 
-module.exports = { getAssembledPC, addAssembledPC, updateAssembledPC };
+const deletedAssembledPC = async (req, res) => {
+    try {
+        const deletedAssembledPC = await assembledPCService.deleteAssembledPC(req.params.id);
+        if (!deletedAssembledPC) {
+            return res.status(404).json({ message: 'No se ha encontrado la PC armada' })
+        }
+
+        res.status(200).json({ deletedAssembledPC })
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { getAssembledPC, addAssembledPC, updateAssembledPC, deletedAssembledPC };

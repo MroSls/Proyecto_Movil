@@ -21,20 +21,33 @@ class AssembledPCService {
 
     async updateAssembledPC(newAssembledPC) {
         try {
-            const updateAssembledPC = await assembledPCModel.findOneAndUpdate(
+            const updatedAssembledPC = await assembledPCModel.findOneAndUpdate(
                 { _id: newAssembledPC._id },
                 { $set: newAssembledPC },
                 { new: true }
             );
-
-            if (!updateAssembledPC) {
+            if (!updatedAssembledPC) {
                 throw new Error('No se ha encontrado la PC armada')
             }
 
-            return updateAssembledPC;
+            return updatedAssembledPC;
         } catch (error) {
             console.log('Error al actualizar la PC armada:', error);
             throw new Error(`Error al actualizar la PC armada:${error.message}`);
+        }
+    }
+
+    async deleteAssembledPC(idAssembledPC) {
+        try {
+            const deletedAssembledPC = await assembledPCModel.findOneAndDelete({ _id: idAssembledPC });
+            if (!deletedAssembledPC) {
+                throw new Error('No se ha encontrado la PC armada');
+            }
+
+            return deletedAssembledPC;
+        } catch (error) {
+            console.log('Error al elimminar la PC armada:', error);
+            throw new Error(`Error al eliminar laa PC armada: ${error.message}`);
         }
     }
 }
