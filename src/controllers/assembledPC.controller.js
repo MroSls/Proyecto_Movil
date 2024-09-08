@@ -9,4 +9,13 @@ const getAssembledPC = async (req, res) => {
     }
 }
 
-module.exports = { getAssembledPC };
+const addAssembledPC = async (req, res) => {
+    try {
+        const newAssembledPC = await assembledPCService.addAssembledPC(req.body);
+        res.status(201).json({ newAssembledPC });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { getAssembledPC, addAssembledPC };
