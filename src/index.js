@@ -22,6 +22,7 @@ app.set('port', process.env.PORT || 5000);
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
 app.use(morgan('dev'));
 
 // Routes
