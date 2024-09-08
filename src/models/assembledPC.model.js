@@ -5,18 +5,18 @@ const assembledPC = new Schema({
     name_pc: { type: String, required: true },
     wifi: { type: Boolean, required: true },
     color: { type: String, required: true },
-    storage_media: [{
+    storage_media: {
         storage_units_installed: { type: String, required: true },
         storage_unit: { type: String, required: true },
         total_storage_capacity: { type: String, required: true }
-    }],
-    memory: [{
+    },
+    memory: {
         memory_ram: { type: String, required: true },
         memory_velocity: { type: String, required: true }
-    }],
+    },
     power_supply: { type: String, required: true },
     software: { type: String, required: true },
-    cpu: [{
+    cpu: {
         cpu: { type: String, required: true },
         cpu_cache: { type: String, required: true },
         cpu_cores: { type: String, required: true },
@@ -26,12 +26,12 @@ const assembledPC = new Schema({
         cpu_model: { type: String, required: true },
         cpu_socket: { type: String, required: true },
         cpu_turbo_frecuency: { type: String, required: true }
-    }],
-    gpu: [{
+    },
+    gpu: {
         gpu_line: { type: String, required: true },
         gpu_name: { type: String, required: true },
         gpu_discrete_model: { type: String, required: true }
-    }]
+    }
 });
 
-module.exports = model('assembled_pc', assembledPC);
+module.exports = model('assembled_pcs', assembledPC);
