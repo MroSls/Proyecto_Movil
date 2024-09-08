@@ -6,7 +6,7 @@ require('dotenv').config({ path: __dirname + '/config/.env' });
 
 let ipAddresses = [];
 for (let interface in networkInterfaces) {
-    for(let alias of networkInterfaces[interface]) {
+    for (let alias of networkInterfaces[interface]) {
         if (alias.family === 'IPv4' && !alias.internal) {
             ipAddresses.push(alias.address);
         }
