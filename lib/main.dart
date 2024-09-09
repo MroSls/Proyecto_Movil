@@ -18,12 +18,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future<List<AssembledPC>> _listAssembledPCs;
 
   @override
   void initState() {
     super.initState();
-    _listAssembledPCs = _getAssembledPCs(); // Inicializar en initState
+// Inicializar en initState
   }
 
   Future<List<AssembledPC>> _getAssembledPCs() async {

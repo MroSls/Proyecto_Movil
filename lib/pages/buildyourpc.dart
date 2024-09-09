@@ -23,6 +23,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
   // Items disponibles para arrastrar
   final List<Map<String, dynamic>> availableItems = [
     {'name': 'CPU 1', 'price': '200', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
+    {'name': 'CPU 1', 'price': '200', 'category': 'APU', 'image': 'assets/images/componenteprueba.png'},
     {'name': 'CPU 2', 'price': '250', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
     {'name': 'CPU 3', 'price': '500', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
     {'name': 'GPU 1', 'price': '500', 'category': 'GPU', 'image': 'assets/images/componenteprueba.png'},

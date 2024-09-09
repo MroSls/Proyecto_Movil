@@ -28,18 +28,18 @@ class Components extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 7, 6, 78),
+        backgroundColor: Colors.black,
         title: Text(
           title,
           style: const TextStyle(
-            color: Color.fromARGB(255, 0, 255, 213),
+            color: Colors.white,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 255, 213)),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context); // Regresa a la pantalla anterior
           },
@@ -52,11 +52,11 @@ class Components extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 10), // Espacio entre las etiquetas
             padding: const EdgeInsets.all(0),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.grey[850],
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.3),
                   spreadRadius: 2,
                   blurRadius: 4,
                   offset: const Offset(0, 2), // Cambiar la posición de la sombra
@@ -64,11 +64,15 @@ class Components extends StatelessWidget {
               ],
             ),
             child: ExpansionTile(
+              backgroundColor: Colors.grey[850],
+              collapsedIconColor: Colors.white,
+              iconColor: Colors.white,
               title: Text(
                 component['label']!,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
               children: [
@@ -78,7 +82,7 @@ class Components extends StatelessWidget {
                     component['details']!,
                     style: const TextStyle(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
