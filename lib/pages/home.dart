@@ -15,18 +15,17 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 7, 6, 78),
+        backgroundColor: Colors.black,
         title: const Text(
           'Doctor pc´s',
           style: TextStyle(
-            color: Color.fromARGB(255, 0, 255, 213),
+            color: Colors.white,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
       ),
-      
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView.separated(
@@ -44,8 +43,16 @@ class HomePage extends StatelessWidget {
               child: Container(
                 height: 250,
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: Colors.grey[850], // Fondo oscuro para las tarjetas
                   borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: const Offset(0, 2), // Sombra para mayor contraste
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: [
