@@ -33,7 +33,7 @@ class Components extends StatelessWidget {
           title,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 30,
+            fontSize: 15.5,
             fontWeight: FontWeight.bold,
           ),
         ),

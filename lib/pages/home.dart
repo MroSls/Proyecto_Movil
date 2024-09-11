@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text(
-          'Doctor pc´s',
+          'PC Station',
           style: TextStyle(
             color: Colors.white,
             fontSize: 30,

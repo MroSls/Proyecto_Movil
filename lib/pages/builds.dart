@@ -25,16 +25,20 @@ class _BuildsState extends State<Builds> {
 
   Future<void> _fetchAssembledPCs() async {
     try {
-      final response = await http.get(Uri.parse('http://192.168.56.1:3000/api/assembledPC'));
+      final response =
+          await http.get(Uri.parse('http://192.168.56.1:3000/api/assembledPC'));
 
       if (response.statusCode == 200) {
-        final data = json.decode(response.body) as Map<String, dynamic>; // Decodifica la respuesta JSON como un mapa
+        final data = json.decode(response.body) as Map<String,
+            dynamic>; // Decodifica la respuesta JSON como un mapa
 
         // Accede a la lista dentro del objeto JSON
         final assembledPCsData = data['assembledPCs'] as List<dynamic>;
 
         setState(() {
-          _assembledPCs = assembledPCsData.map((item) => AssembledPC.fromJson(item as Map<String, dynamic>)).toList();
+          _assembledPCs = assembledPCsData
+              .map((item) => AssembledPC.fromJson(item as Map<String, dynamic>))
+              .toList();
         });
       } else {
         print('Error: ${response.statusCode}');
@@ -106,7 +110,9 @@ class _BuildsState extends State<Builds> {
       context,
       MaterialPageRoute(
         builder: (context) => Components(
-          imagePath: assembledPC.urlImage.isNotEmpty ? assembledPC.urlImage[0] : '', // Mostrar la primera imagen de la lista
+          imagePath: assembledPC.urlImage.isNotEmpty
+              ? assembledPC.urlImage[0]
+              : '', // Mostrar la primera imagen de la lista
           title: assembledPC.namePC,
           description: assembledPC.software,
         ),
@@ -123,7 +129,7 @@ class _BuildsState extends State<Builds> {
           'Builds',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -152,11 +158,15 @@ class _BuildsState extends State<Builds> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(10)),
                     child: Image.network(
-                      assembledPC.urlImage.isNotEmpty ? assembledPC.urlImage[0] : '', // Mostrar la primera imagen de la lista
+                      assembledPC.urlImage.isNotEmpty
+                          ? assembledPC.urlImage[0]
+                          : '', // Mostrar la primera imagen de la lista
+                      // width: double.infinity,
                       width: double.infinity,
-                      height: 150,
+                      height: 400,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -173,7 +183,7 @@ class _BuildsState extends State<Builds> {
                             color: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         Text(
                           assembledPC.software,
                           style: const TextStyle(
@@ -196,6 +206,9 @@ class _BuildsState extends State<Builds> {
           Icons.monetization_on,
           color: Colors.white,
         ),
+        onPressed: () {
+          _showPriceRangeDialog();
+        },
       ),
     );
   }
