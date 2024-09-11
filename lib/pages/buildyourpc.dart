@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BuildYourPC extends StatefulWidget {
+  const BuildYourPC({super.key});
+
   @override
   _BuildYourPCState createState() => _BuildYourPCState();
 }
@@ -81,15 +83,15 @@ class _BuildYourPCState extends State<BuildYourPC> {
           // Contenedor para arrastrar y soltar
           Container(
             color: Colors.grey[850],
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             margin: EdgeInsets.zero, // Eliminado el margen para evitar el marco blanco
             height: MediaQuery.of(context).size.height * 0.3,
             child: Stack(
               children: [
                 DragTarget<Map<String, dynamic>>(
-                  onAccept: (item) {
+                  onAcceptWithDetails: (item) {
                     setState(() {
-                      String category = item['category'];
+                      String category = item.data['category'];
 
                       // Restar el precio del ítem anterior, si existe
                       if (activeItems.containsKey(category)) {
@@ -99,8 +101,8 @@ class _BuildYourPCState extends State<BuildYourPC> {
                       }
 
                       // Agregar el nuevo ítem y sumar su precio
-                      activeItems[category] = item;
-                      totalPrice += double.parse(item['price']);
+                      activeItems[category] = item.data as Map<String, dynamic>?;
+                      totalPrice += double.parse(item.data['price']);
                       availableItems.remove(item);
                     });
                   },
@@ -110,7 +112,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                         activeItems.isNotEmpty
                             ? 'Item: ${activeItems.values.where((item) => item != null).map((item) => item!['name']).join(', ')}'
                             : 'Drop items here',
-                        style: TextStyle(fontSize: 18, color: Colors.white70),
+                        style: const TextStyle(fontSize: 18, color: Colors.white70),
                       ),
                     );
                   },
@@ -122,7 +124,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Total: \$${totalPrice.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -147,7 +149,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                     children: [
                       Text(
                         category,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -156,7 +158,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                       SizedBox(
                         height: 300, // Aumentar la altura para permitir una mejor visualización de las tarjetas
                         child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, // Número de columnas por categoría
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
@@ -167,47 +169,12 @@ class _BuildYourPCState extends State<BuildYourPC> {
                             var item = itemsInCategory[itemIndex];
                             return Draggable<Map<String, dynamic>>(
                               data: item,
-                              child: Card(
-                                color: Colors.grey[850],
-                                elevation: 4,
-                                margin: EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    if (item['image'] != null) 
-                                      Image.asset(
-                                        item['image'] ?? 'assets/images/componenteprueba.png', // Imagen del componente
-                                        width: 80, // Ancho de la imagen
-                                        height: 80, // Alto de la imagen
-                                        fit: BoxFit.cover, // Ajustar la imagen dentro del contenedor
-                                      ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        item['name'] ?? 'No name',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '\$${item['price'] ?? '0'}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white60,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               feedback: Material(
                                 color: Colors.grey[800],
                                 child: Card(
                                   color: Colors.grey[850],
                                   elevation: 4,
-                                  margin: EdgeInsets.all(8.0),
+                                  margin: const EdgeInsets.all(8.0),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -222,7 +189,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           item['name'] ?? 'No name',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
@@ -231,13 +198,48 @@ class _BuildYourPCState extends State<BuildYourPC> {
                                       ),
                                       Text(
                                         '\$${item['price'] ?? '0'}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.white60,
                                         ),
                                       ),
                                     ],
                                   ),
+                                ),
+                              ),
+                              child: Card(
+                                color: Colors.grey[850],
+                                elevation: 4,
+                                margin: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (item['image'] != null) 
+                                      Image.asset(
+                                        item['image'] ?? 'assets/images/componenteprueba.png', // Imagen del componente
+                                        width: 80, // Ancho de la imagen
+                                        height: 80, // Alto de la imagen
+                                        fit: BoxFit.cover, // Ajustar la imagen dentro del contenedor
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        item['name'] ?? 'No name',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '\$${item['price'] ?? '0'}',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white60,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             );

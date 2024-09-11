@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
           title: '',
           description: '',
         ),
-        '/buildyourpc': (context) => BuildYourPC(),
+        '/buildyourpc': (context) => const BuildYourPC(),
       },
     );
   }

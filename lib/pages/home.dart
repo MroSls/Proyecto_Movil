@@ -64,10 +64,10 @@ class HomePage extends StatelessWidget {
                                 );
                               },
                             )
-                          : Center(
+                          : const Center(
                               child: Text(
                                 'No images available',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,

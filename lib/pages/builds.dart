@@ -159,11 +159,11 @@ class _BuildsState extends State<Builds> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 7, 6, 78),
+        onPressed: _showPriceRangeDialog,
         child: const Icon(
           Icons.monetization_on,
           color: Colors.white, // Color del icono
         ),
-        onPressed: _showPriceRangeDialog,
       ),
     );
   }
