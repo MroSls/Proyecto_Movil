@@ -5,6 +5,7 @@ const assembledPC = new Schema({
     name_pc: { type: String, required: true },
     wifi: { type: Boolean, required: true },
     color: { type: String, required: true },
+    url: { type: String, require: true},
     storage_media: {
         storage_units_installed: { type: String, required: true },
         storage_unit: { type: String, required: true },
