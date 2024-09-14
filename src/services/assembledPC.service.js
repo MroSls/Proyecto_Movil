@@ -5,7 +5,7 @@ class AssembledPCService {
         try {
             return await assembledPCModel.find().lean();
         } catch (error) {
-            console.error('Error al buscar PCs armadas:', error);
+            console.log('Error al buscar PCs armadas:', error);
             throw new Error(`Error al buscar PCs armadas: ${error.message}`);
         }
     }
@@ -27,7 +27,7 @@ class AssembledPCService {
                 { new: true }
             );
             if (!updatedAssembledPC) {
-                throw new Error('No se ha encontrado la PC armada')
+                throw new Error('No se ha encontrado la PC armada');
             }
 
             return updatedAssembledPC;
