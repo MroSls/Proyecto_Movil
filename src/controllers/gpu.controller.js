@@ -25,7 +25,7 @@ const updateGPU = async (req, res) => {
             res.status(404).json({ message: 'No se ah encontrado la grafica' });
         }
 
-        res.json({ updatedGPU });
+        res.status(200).json({ updatedGPU });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -38,7 +38,7 @@ const deleteGPU = async (req, res) => {
             res.status(404).json({ message: 'No se ah encontrado la grafica' });
         }
         
-        res.json({ deltedGPU });
+        res.status(200).json({ deltedGPU });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

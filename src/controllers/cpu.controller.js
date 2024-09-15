@@ -25,7 +25,7 @@ const updateCPU = async (req, res) => {
             res.status(404).json({ message: 'No se ha encontrado el procesador'});
         }
 
-        res.status(201).json({ updatedCPU });
+        res.status(200).json({ updatedCPU });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -38,7 +38,7 @@ const deleteCPU = async (req, res) => {
             res.status(404).json({ message: 'No se ha encontrado el procesador'});
         }
 
-        res.status(201).json({ deletedCPU });
+        res.status(200).json({ deletedCPU });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
