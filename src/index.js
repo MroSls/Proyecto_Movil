@@ -28,6 +28,14 @@ app.use(morgan('dev'));
 
 // Routes
 app.use(require('./routes/assembledPC.route'));
+app.use(require('./routes/case.route'));
+app.use(require('./routes/cooler.route'));
+app.use(require('./routes/cpu.route'));
+app.use(require('./routes/gpu.route'));
+app.use(require('./routes/motherboard.route'));
+app.use(require('./routes/psu.route'));
+app.use(require('./routes/ram.route'));
+app.use(require('./routes/storage.route'));
 
 // Server is listening
 app.listen(app.get('port'), () => {
