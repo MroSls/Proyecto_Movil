@@ -22,7 +22,7 @@ const updateCPU = async (req, res) => {
     try {
         const updatedCPU = await CPUService.updateCPU(req.body);
         if (!updatedCPU) {
-            throw new Error('No se ha encontrado el procesador');
+            res.status(404).json({ message: 'No se ha encontrado el procesador'});
         }
 
         res.status(201).json({ updatedCPU });
@@ -35,7 +35,7 @@ const deleteCPU = async (req, res) => {
     try {
         const deletedCPU = await CPUService.updateCPU(req.params.id);
         if (!deletedCPU) {
-            throw new Error('No se ha encontrado el procesador');
+            res.status(404).json({ message: 'No se ha encontrado el procesador'});
         }
 
         res.status(201).json({ deletedCPU });
