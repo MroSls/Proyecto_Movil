@@ -8,7 +8,8 @@ const ramSchema = new Schema({
     speed: { type: Number, required: true },
     compatibility: {
         motherboard_ram_type: { type: String, enum: ['DDR4', 'DDR5'], required: true }
-    }
+    },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('ram', ramSchema);

@@ -33,7 +33,8 @@ const assembledPC = new Schema({
         gpu_discrete_model: { type: String, required: true }
     },
     url: { type: String, require: true },
-    category: { type: String, enum: ['Gamer', 'Office', 'School'], required: true }
+    category: { type: String, enum: ['Gamer', 'Office', 'School'], required: true },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('assembled_pcs', assembledPC);

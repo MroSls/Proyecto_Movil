@@ -8,7 +8,8 @@ const psuSchema = new Schema({
     modular: { type: Boolean, required: true },
     compatibility: {
         required_power: { type: Number, required: true } // Potencia requerida por la motherboard
-    }
+    },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('psu', psuSchema);

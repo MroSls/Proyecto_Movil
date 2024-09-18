@@ -14,7 +14,8 @@ const motherboardSchema = new Schema({
             nvme: { type: Boolean, required: true }
         },
         psu_power: { type: Number, required: true }
-    }
+    },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('motherboard', motherboardSchema);

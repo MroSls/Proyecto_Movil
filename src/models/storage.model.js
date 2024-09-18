@@ -8,7 +8,8 @@ const storageSchema = new Schema({
     speed: { type: Number, required: true },
     compatibility: {
         motherboard_storage_type: { type: String, enum: ['SATA', 'NVMe'], required: true }
-    }
+    },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('storage', storageSchema);

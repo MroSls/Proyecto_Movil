@@ -9,8 +9,8 @@ const coolerSchema = new Schema({
     compatibility: {
         cpu_socket: { type: String, required: true }, // Compatibilidad con el socket del CPU
         case_clearanse: { type: Boolean, required: true } // Verifica si cabe en el gabinete
-
     },
+    price: { type: Number, required: true}
 });
 
 module.exports = model('cooler', coolerSchema);
