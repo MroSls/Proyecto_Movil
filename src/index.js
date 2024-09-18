@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const os = require('os');
 const networkInterfaces = os.networkInterfaces();
-const { generateToken } = require('../src/middleware/auth')
+const { generateToken } = require('../src/middleware/auth');
 require('dotenv').config({ path: __dirname + '/config/.env' });
 
 let ipAddresses = [];
@@ -23,7 +23,7 @@ app.set('port', process.env.PORT || 5000);
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
@@ -41,7 +41,7 @@ app.use(require('./routes/storage.route'));
 app.listen(app.get('port'), () => {
     const token = generateToken();
     console.log(`Servidor en el puerto ${app.get('port')}\n`);
-    console.log(`Token generado (valido por 3 horas):\n${token}\n`)
+    console.log(`Token generado (valido por 3 horas):\n${token}\n`);
     ipAddresses.forEach(ip => {
         console.log(`Accede a la API desde ---> http://${ip}:${app.get('port')}`);
     })
