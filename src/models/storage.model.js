@@ -9,6 +9,7 @@ const storageSchema = new Schema({
     compatibility: {
         motherboard_storage_type: { type: String, enum: ['SATA', 'NVMe'], required: true }
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

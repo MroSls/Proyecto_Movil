@@ -6,6 +6,7 @@ const caseSchema = new Schema({
     form_factor: { type: String, enum: ['ATX', 'Micro-ATX', 'Mini-ITX'], required: true },
     max_gpu_length_mm: { type: Number, required: true },
     max_cooler_height_mm: { type: Number, required: true },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

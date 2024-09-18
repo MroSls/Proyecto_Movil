@@ -10,6 +10,7 @@ const coolerSchema = new Schema({
         cpu_socket: { type: String, required: true }, // Compatibilidad con el socket del CPU
         case_clearanse: { type: Boolean, required: true } // Verifica si cabe en el gabinete
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

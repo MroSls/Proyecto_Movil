@@ -9,6 +9,7 @@ const psuSchema = new Schema({
     compatibility: {
         required_power: { type: Number, required: true } // Potencia requerida por la motherboard
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

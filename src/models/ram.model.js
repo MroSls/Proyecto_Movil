@@ -9,6 +9,7 @@ const ramSchema = new Schema({
     compatibility: {
         motherboard_ram_type: { type: String, enum: ['DDR4', 'DDR5'], required: true }
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

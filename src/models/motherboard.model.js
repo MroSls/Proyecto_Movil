@@ -13,6 +13,7 @@ const motherboardSchema = new Schema({
             sata: { type: Boolean, required: true },
             nvme: { type: Boolean, required: true }
         },
+        url: { type: String, require: true },
         psu_power: { type: Number, required: true }
     },
     price: { type: Number, required: true}

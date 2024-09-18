@@ -12,6 +12,7 @@ const cpuSchema = new Schema({
         motherboard_socket: { type: String, required: true }, // Compatibilidad con el socket de la motherboard
         gpu_performance_threshold: { type: Number, required: true } // Umbral mínimo de rendimiento de la GPU para evitar cuello de botella
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 

@@ -12,6 +12,7 @@ const gpuSchema = new Schema ({
         cpu_compatibility: { type: String, enum: ['Intel', 'AMD'], required: true }, // Compatibilidad para evitar cuello de botella con el procesador
         cpu_performance_thresold: { type: String, required: true } // Nivel mínimo de rendimiento del CPU para evitar cuello de botella
     },
+    url: { type: String, require: true },
     price: { type: Number, required: true}
 });
 
