@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const motherboardModel = require('./motherboard.model');
 
 const cpuSchema = new Schema({
+    url_image: { type: String, required: true },
     name: { type: String, required: true },
     brand: { type: String, required: true },
     socket: { type: String, required: true },

@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const storageSchema = new Schema({
+    url_image: { type: String, required: true },
     name: { type: String, required: true },
     brand: { type: String, required: true },
     type: { type: String,  enum: ['SATA', 'NVMe'], required: true },

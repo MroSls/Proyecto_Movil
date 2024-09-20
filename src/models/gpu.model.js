@@ -1,6 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const gpuSchema = new Schema ({
+    url_image: { type: String, required: true },
     name: { type: String, required: true},
     brand: { type: String, required: true},
     chipset: { type: String, enum: ['NVIDIA', 'AMD'], required: true},

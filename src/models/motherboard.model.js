@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const motherboardSchema = new Schema({
+    url_image: { type: String, required: true },
     name: { type: String, required: true },
     brand: { type: String, required: true },
     socket: { type: String, required: true },

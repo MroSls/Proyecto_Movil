@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const caseSchema = new Schema({
+    url_image: { type: String, required: true },
     name: { type: String, required: true },
     brand: { type: String, required: true },
     form_factor: { type: String, enum: ['ATX', 'Micro-ATX', 'Mini-ITX'], required: true },
