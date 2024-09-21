@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const os = require('os');
 const networkInterfaces = os.networkInterfaces();
-const { generateToken } = require('../src/middleware/auth');
 require('dotenv').config({ path: __dirname + '/config/.env' });
 
 let ipAddresses = [];
@@ -28,6 +27,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use(require('./routes/assembledPC.route'));
+app.use(require('./routes/auth.route'));
 app.use(require('./routes/case.route'));
 app.use(require('./routes/cooler.route'));
 app.use(require('./routes/cpu.route'));
@@ -39,9 +39,7 @@ app.use(require('./routes/storage.route'));
 
 // Server is listening
 app.listen(app.get('port'), () => {
-    const token = generateToken();
     console.log(`Servidor en el puerto ${app.get('port')}\n`);
-    console.log(`Token generado (valido por 3 horas):\n${token}\n`);
     ipAddresses.forEach(ip => {
         console.log(`Accede a la API desde ---> http://${ip}:${app.get('port')}`);
     })
