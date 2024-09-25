@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // Para decodificar JSON
-import '../models/assembledPC.dart';
+import '../models/assembledPC.model.dart';
 import 'components.dart';
 
 class Builds extends StatefulWidget {

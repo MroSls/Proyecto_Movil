@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_movil/models/assembledPC.dart';
-import 'pages/home.dart';
-import 'pages/builds.dart';
-import 'pages/components.dart';
-import 'pages/buildyourpc.dart';
+import 'package:proyecto_movil/models/assembledPC.model.dart';
+import 'view/home.dart';
+import 'view/builds.dart';
+import 'view/components.dart';
+import 'view/buildyourpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 void main() {
