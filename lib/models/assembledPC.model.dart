@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class AssembledPC {
   final List<String> urlImage;
@@ -12,18 +12,17 @@ class AssembledPC {
   final CPU cpu;
   final GPU gpu;
 
-  AssembledPC({
-    required this.urlImage,
-    required this.namePC,
-    required this.wifi,
-    required this.color,
-    required this.storageMedia,
-    required this.memory,
-    required this.powerSuppy,
-    required this.software,
-    required this.cpu,
-    required this.gpu
-  });
+  AssembledPC(
+      {required this.urlImage,
+      required this.namePC,
+      required this.wifi,
+      required this.color,
+      required this.storageMedia,
+      required this.memory,
+      required this.powerSuppy,
+      required this.software,
+      required this.cpu,
+      required this.gpu});
 
   factory AssembledPC.fromJson(Map<String, dynamic> json) {
     return AssembledPC(
@@ -46,11 +45,10 @@ class StorageMedia {
   final String storageUnit;
   final String totalStorageCapacity;
 
-  StorageMedia({
-    required this.storageUnitsInstalled,
-    required this.storageUnit,
-    required this.totalStorageCapacity
-  });
+  StorageMedia(
+      {required this.storageUnitsInstalled,
+      required this.storageUnit,
+      required this.totalStorageCapacity});
 
   factory StorageMedia.fromJson(Map<String, dynamic> json) {
     return StorageMedia(
@@ -65,10 +63,7 @@ class Memory {
   final String memoryRam;
   final String memoryVelocity;
 
-  Memory ({
-    required this.memoryRam,
-    required this.memoryVelocity
-  });
+  Memory({required this.memoryRam, required this.memoryVelocity});
 
   factory Memory.fromJson(Map<String, dynamic> json) {
     return Memory(
@@ -89,17 +84,16 @@ class CPU {
   final String cpuSocket;
   final String cpuTurboFrecuency;
 
-  CPU ({
-    required this.cpu,
-    required this.cpuCache,
-    required this.cpuCores,
-    required this.cpuFamily,
-    required this.cpuGeneration,
-    required this.cpuMemorySupported,
-    required this.cpuModel,
-    required this.cpuSocket,
-    required this.cpuTurboFrecuency
-  });
+  CPU(
+      {required this.cpu,
+      required this.cpuCache,
+      required this.cpuCores,
+      required this.cpuFamily,
+      required this.cpuGeneration,
+      required this.cpuMemorySupported,
+      required this.cpuModel,
+      required this.cpuSocket,
+      required this.cpuTurboFrecuency});
 
   factory CPU.fromJson(Map<String, dynamic> json) {
     return CPU(
@@ -121,11 +115,10 @@ class GPU {
   final String gpuName;
   final String gpuDiscreteModel;
 
-  GPU ({
-    required this.gpuLine,
-    required this.gpuName,
-    required this.gpuDiscreteModel
-  });
+  GPU(
+      {required this.gpuLine,
+      required this.gpuName,
+      required this.gpuDiscreteModel});
 
   factory GPU.fromJson(Map<String, dynamic> json) {
     return GPU(
