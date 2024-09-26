@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthService {
+class AuthToken {
   final String endpoint = 'https://proyecto-movil-6fkk.onrender.com/api/API-RESTful/auth';
 
   Future<String?> fetchToken() async {
