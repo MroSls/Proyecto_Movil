@@ -11,6 +11,7 @@ class AssembledPCViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> fetchAssembledPCs() async {
+    if (_assembledPCs.isNotEmpty) return;
     _isLoading = true;
     notifyListeners();
 

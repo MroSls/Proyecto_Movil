@@ -11,6 +11,7 @@ class CaseViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> fetchCases() async {
+    if (_cases.isNotEmpty) return;
     _isLoading = true;
     notifyListeners();
 
