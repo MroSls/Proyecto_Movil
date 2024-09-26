@@ -10,7 +10,7 @@ class AssembledPCService {
   Future<List<AssembledPC>> fetchAssembledPCs() async {
     String? token = await authToken.fetchToken();
     final response = await http.get(
-      Uri.parse(endpoint),
+      Uri.parse(endpoint), 
       headers: {
         'Authorization': token ?? '',
       },
@@ -26,24 +26,7 @@ class AssembledPCService {
         throw Exception('El campo "assembledPCs" no es una lista.');
       }
     } else {
-      throw Exception(
-          'Error al cargar las PCs ensambladas: ${response.statusCode} => ${response.body}');
-    }
-  }
-
-  Future<AssembledPC> getAssembledPCById(String id) async {
-    String? token = await authToken.fetchToken();
-    final response = await http.get(
-      Uri.parse('$endpoint/$id'), 
-      headers: {
-        'Authorization': token ?? '',
-    },
-  );
-
-    if (response.statusCode == 200) {
-      return AssembledPC.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Error al cargar la PC: ${response.statusCode}');
+      throw Exception('Error al cargar las PCs ensambladas: ${response.statusCode} => ${response.body}');
     }
   }
 }
