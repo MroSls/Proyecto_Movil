@@ -6,6 +6,8 @@ import 'view/components.dart';
 import 'view/buildyourpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:proyecto_movil/data/auth/auth.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -26,14 +27,25 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<List<AssembledPC>> _getAssembledPCs() async {
-    final response = await http.get(Uri.parse("http://192.168.56.1:3000/api/assembledPC"));
+    AuthService authService = AuthService();
+    String? token = await authService.getToken();
+    if (token == null) {
+      throw Exception("Token no disponible.");
+    }
+    final response = await http.get(
+      Uri.parse("http://192.168.56.1:3000/api/assembledPC"),
+      headers: {
+        'Authorization': '$token', // Agrega el token a los encabezados
+      },
+    );
 
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
       if (jsonResponse.containsKey('assembledPCs')) {
         List<dynamic> pcList = jsonResponse['assembledPCs'];
-        List<AssembledPC> assembledPCs = pcList.map((pc) => AssembledPC.fromJson(pc)).toList();
+        List<AssembledPC> assembledPCs =
+            pcList.map((pc) => AssembledPC.fromJson(pc)).toList();
         for (var pc in pcList) {
           print(pc);
         }
@@ -55,10 +67,10 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/builds': (context) => const Builds(),
         '/components': (context) => const Components(
-          imagePath: '',
-          title: '',
-          description: '',
-        ),
+              imagePath: '',
+              title: '',
+              description: '',
+            ),
         '/buildyourpc': (context) => const BuildYourPC(),
       },
     );
