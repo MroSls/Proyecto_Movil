@@ -8,10 +8,10 @@ class AssembledPCView extends StatefulWidget {
   const AssembledPCView({super.key});
 
   @override
-  _AssembledPCViewState createState() => _AssembledPCViewState();
+  AssembledPCViewState createState() => AssembledPCViewState();
 }
 
-class _AssembledPCViewState extends State<AssembledPCView> {
+class AssembledPCViewState extends State<AssembledPCView> {
   @override
   void initState() {
     super.initState();
