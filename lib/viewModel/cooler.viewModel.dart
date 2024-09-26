@@ -18,7 +18,7 @@ class CoolerViewModel extends ChangeNotifier {
     try {
       _Coolers = await _service.fetchCoolers();
     } catch (e) {
-      throw Exception('Error al cargar los gabinetes: $e');
+      throw Exception('Error al cargar los coolers: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
