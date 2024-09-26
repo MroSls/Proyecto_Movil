@@ -9,9 +9,12 @@ class CaseService {
   
   Future<List<Case>> fetchCases() async {
     String? token = await authToken.fetchToken();
-    final response = await http.get(Uri.parse(endpoint), headers: {
+    final response = await http.get(
+      Uri.parse(endpoint), 
+      headers: {
         'Authorization': token ?? '',
-      });
+      },
+    );
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = jsonDecode(response.body);
@@ -22,19 +25,6 @@ class CaseService {
       } else {
         throw Exception('El campo "cases" no es una lista.');
       }
-    } else {
-      throw Exception('Error al cargar los gabinetes: ${response.statusCode}');
-    }
-  }
-
-  Future<Case> getCaseById(String id) async {
-    String? token = await authToken.fetchToken();
-    final response = await http.get(Uri.parse('$endpoint/$id'), headers: {
-      'Authorization': token ?? '',
-    });
-
-    if (response.statusCode == 200) {
-      return Case.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Error al cargar los gabinetes: ${response.statusCode}');
     }
