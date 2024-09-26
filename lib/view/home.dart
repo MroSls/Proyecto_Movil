@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                 if (labels[index] == 'armar pc') {
                   Navigator.pushNamed(context, '/buildyourpc');
                 } else {
-                  Navigator.pushNamed(context, '/builds');
+                  Navigator.pushNamed(context, '/assembledPC.view');
                 }
               },
               child: Container(
