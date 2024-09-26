@@ -15,7 +15,7 @@ class AuthService {
       await _saveToken(token);
       return token;
     } else {
-      throw Exception('Error al obtener el token');
+      throw Exception('Error al obtener el token.');
     }
   }
 
