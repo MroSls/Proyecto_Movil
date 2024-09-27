@@ -6,6 +6,8 @@ class CPU {
   int threads;
   double clockSpeed;
   Compatibility compatibility;
+  String url;
+  int price;
 
   CPU({
     required this.name,
@@ -15,6 +17,8 @@ class CPU {
     required this.threads,
     required this.clockSpeed,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
 
   factory CPU.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class CPU {
       threads: json['threads'],
       clockSpeed: json['clock_speed'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

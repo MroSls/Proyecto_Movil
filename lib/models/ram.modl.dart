@@ -5,15 +5,18 @@ class RAM {
   int capacity;
   int speed;
   Compatibility compatibility;
+  String url;
+  int price;
 
-  RAM({
-    required this.name,
-    required this.brand,
-    required this.type,
-    required this.capacity,
-    required this.speed,
-    required this.compatibility,
-  });
+  RAM(
+      {required this.name,
+      required this.brand,
+      required this.type,
+      required this.capacity,
+      required this.speed,
+      required this.compatibility,
+      required this.url,
+      required this.price});
 
   factory RAM.fromJson(Map<String, dynamic> json) {
     return RAM(
@@ -23,6 +26,8 @@ class RAM {
       capacity: json['capacity'],
       speed: json['speed'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

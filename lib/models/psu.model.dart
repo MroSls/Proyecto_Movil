@@ -5,6 +5,8 @@ class PSU {
   String efficiencyRating;
   bool modular;
   Compatibility compatibility;
+  String url;
+  int price;
 
   PSU({
     required this.name,
@@ -13,6 +15,8 @@ class PSU {
     required this.efficiencyRating,
     required this.modular,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
   factory PSU.fromJson(Map<String, dynamic> json) {
     return PSU(
@@ -22,6 +26,8 @@ class PSU {
       efficiencyRating: json['efficiency_rating'],
       modular: json['modular'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

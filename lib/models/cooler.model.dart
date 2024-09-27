@@ -5,6 +5,8 @@ class Cooler {
   int fanSizeMm;
   int noiseLevel;
   Compatibility compatibility;
+  String url;
+  int price;
 
   Cooler({
     required this.name,
@@ -13,6 +15,8 @@ class Cooler {
     required this.fanSizeMm,
     required this.noiseLevel,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
 
   factory Cooler.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class Cooler {
       fanSizeMm: json['fanSizeMm'],
       noiseLevel: json['noiseLevel'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

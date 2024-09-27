@@ -7,7 +7,8 @@ class GPU {
   int powerConsumption;
   int lengthMm;
   Compatibility compatibility;
-
+  String url;
+  int price;
   GPU({
     required this.name,
     required this.brand,
@@ -17,6 +18,8 @@ class GPU {
     required this.powerConsumption,
     required this.lengthMm,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
   factory GPU.fromJson(Map<String, dynamic> json) {
     return GPU(
@@ -28,6 +31,8 @@ class GPU {
       powerConsumption: json['powerConsumption'],
       lengthMm: json['lengthMm'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

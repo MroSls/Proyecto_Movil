@@ -11,6 +11,9 @@ class AssembledPC {
   final String software;
   final CPU cpu;
   final GPU gpu;
+  final String url;
+  final String category;
+  final int price;
 
   AssembledPC(
       {required this.urlImage,
@@ -22,7 +25,10 @@ class AssembledPC {
       required this.powerSuppy,
       required this.software,
       required this.cpu,
-      required this.gpu});
+      required this.gpu,
+      required this.url,
+      required this.category,
+      required this.price});
 
   factory AssembledPC.fromJson(Map<String, dynamic> json) {
     return AssembledPC(
@@ -36,6 +42,9 @@ class AssembledPC {
       software: json['software'],
       cpu: CPU.fromJson(json['cpu']),
       gpu: GPU.fromJson(json['gpu']),
+      url: json['url'],
+      category: json['category'],
+      price: json['price'],
     );
   }
 }

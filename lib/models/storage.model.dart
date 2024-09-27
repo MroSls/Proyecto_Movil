@@ -5,6 +5,8 @@ class Storage {
   int capacity;
   int speed;
   Compatibility compatibility;
+  String url;
+  int price;
 
   Storage({
     required this.name,
@@ -13,6 +15,8 @@ class Storage {
     required this.capacity,
     required this.speed,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
   factory Storage.fromJson(Map<String, dynamic> json) {
     return Storage(
@@ -22,6 +26,8 @@ class Storage {
       capacity: json['capacity'],
       speed: json['speed'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }

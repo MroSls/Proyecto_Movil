@@ -3,12 +3,16 @@ class Motherboard {
   String brand;
   String socket;
   Compatibility compatibility;
+  String url;
+  int price;
 
   Motherboard({
     required this.name,
     required this.brand,
     required this.socket,
     required this.compatibility,
+    required this.url,
+    required this.price,
   });
 
   factory Motherboard.fromJson(Map<String, dynamic> json) {
@@ -17,6 +21,8 @@ class Motherboard {
       brand: json['brand'],
       socket: json['socket'],
       compatibility: Compatibility.fromJson(json['compatibility']),
+      url: json['url'],
+      price: json['price'],
     );
   }
 }
