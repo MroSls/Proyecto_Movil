@@ -10,6 +10,7 @@ class GPU {
   Compatibility compatibility;
   String url;
   int price;
+
   GPU({
     required this.url_image,
     required this.name,
@@ -23,19 +24,20 @@ class GPU {
     required this.url,
     required this.price,
   });
+
   factory GPU.fromJson(Map<String, dynamic> json) {
     return GPU(
-      url_image: json['url_image'],
-      name: json['name'],
-      brand: json['brand'],
-      chipset: json['chipset'],
-      memory: json['memory'],
-      pciVersion: json['pciVersion'],
-      powerConsumption: json['powerConsumption'],
-      lengthMm: json['lengthMm'],
-      compatibility: Compatibility.fromJson(json['compatibility']),
-      url: json['url'],
-      price: json['price'],
+      url_image: json['url_image'] ?? 'default_image_url', 
+      name: json['name'] ?? 'Unknown', 
+      brand: json['brand'] ?? 'Unknown', 
+      chipset: json['chipset'] ?? 'Unknown', 
+      memory: json['memory'] ?? 'Unknown', 
+      pciVersion: json['pciVersion'] ?? 'Unknown', 
+      powerConsumption: json['powerConsumption'] ?? 0, 
+      lengthMm: json['lengthMm'] ?? 0, 
+      compatibility: Compatibility.fromJson(json['compatibility'] ?? {}), // Manejo de nulos
+      url: json['url'] ?? 'https://default-url.com', 
+      price: json['price'] ?? 0, 
     );
   }
 }
@@ -48,10 +50,11 @@ class Compatibility {
     required this.cpuCompatibility,
     required this.cpuPerformanceThreshold,
   });
+
   factory Compatibility.fromJson(Map<String, dynamic> json) {
     return Compatibility(
-      cpuCompatibility: json['cpuCompatibility'],
-      cpuPerformanceThreshold: json['cpuPerformanceThreshold'],
+      cpuCompatibility: json['cpuCompatibility'] ?? 'Unknown', 
+      cpuPerformanceThreshold: json['cpuPerformanceThreshold'] ?? 'Unknown', 
     );
   }
 }

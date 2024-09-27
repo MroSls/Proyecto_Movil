@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../data/services/cpu.service.dart';
-import '../models/cpu.model.dart';
 import '../viewModel/cpu.viewModel.dart';
+import '../viewModel/gpu.viewModel.dart';
 
 class BuildYourPC extends StatefulWidget {
   const BuildYourPC({super.key});
@@ -14,8 +13,8 @@ class _BuildYourPCState extends State<BuildYourPC> {
   double totalPrice = 0.0;
   final Map<String, Map<String, dynamic>?> activeItems = {};
   final CPUViewModel cpuViewModel = CPUViewModel();
+  final GPUViewModel gpuViewModel = GPUViewModel();
 
-  // Definir las categorías iniciales
   final List<String> categoriesList = [
     'CPU',
     'GPU',
@@ -26,30 +25,49 @@ class _BuildYourPCState extends State<BuildYourPC> {
     'Refrigeración Líquida',
   ];
 
-  // Items disponibles para arrastrar
-  List<Map<String, dynamic>> availableItems = []; // Inicializa como lista vacía
+  List<Map<String, dynamic>> availableItems = [];
 
   @override
   void initState() {
     super.initState();
     fetchCPUs();
+    fetchGPUs();
   }
 
   Future<void> fetchCPUs() async {
-    await cpuViewModel.fetchCPUs(); // Carga los CPUs
+    await cpuViewModel.fetchCPUs();
     setState(() {
-      availableItems = cpuViewModel.CPUs.map((cpu) {
+      availableItems.addAll(cpuViewModel.CPUs.map((cpu) {
         return {
           'name': cpu.name,
           'price': cpu.price,
           'category': 'CPU',
-          'image': 'assets/images/componenteprueba.png', // Ruta de la imagen
+          'image': cpu.url_image,
         };
-      }).toList();
+      }).toList());
     });
   }
 
-  // Generar las categorías basadas en los ítems disponibles
+  Future<void> fetchGPUs() async {
+    try {
+      await gpuViewModel.fetchGPUs();
+      setState(() {
+        availableItems.addAll(gpuViewModel.GPUs.map((gpu) {
+          return {
+            'name': gpu.name ?? 'Unknown',
+            'price': gpu.price ?? 0.0,
+            'category': 'GPU',
+            'image': gpu.url_image ?? 'default_image_url',
+          };
+        }).toList());
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al cargar GPUs: $e')),
+      );
+    }
+  }
+
   Map<String, List<Map<String, dynamic>>> get categories {
     final Map<String, List<Map<String, dynamic>>> catMap = {};
 
@@ -60,8 +78,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
       }
       catMap[category]!.add(item);
     }
-    
-    // Asegurar que todas las categorías se muestren, incluso si están vacías
+
     for (var category in categoriesList) {
       if (!catMap.containsKey(category)) {
         catMap[category] = [];
@@ -88,7 +105,6 @@ class _BuildYourPCState extends State<BuildYourPC> {
       ),
       body: Column(
         children: [
-          // Contenedor para arrastrar y soltar
           Container(
             color: Colors.grey[850],
             padding: const EdgeInsets.all(16.0),
@@ -101,18 +117,14 @@ class _BuildYourPCState extends State<BuildYourPC> {
                     setState(() {
                       String category = item.data['category'];
 
-                      // Restar el precio del ítem anterior, si existe
                       if (activeItems.containsKey(category)) {
                         var previousItem = activeItems[category]!;
                         totalPrice -= double.parse(previousItem['price'].toString());
-                        availableItems.add(previousItem); // Devuelve el ítem a la lista de disponibles
+                        availableItems.add(previousItem);
                       }
 
-                      // Agregar el nuevo ítem y sumar su precio
-                      activeItems[category] = item.data; // Guardar el nuevo ítem
+                      activeItems[category] = item.data;
                       totalPrice += double.parse(item.data['price'].toString());
-
-                      // Eliminar el ítem de la lista de disponibles
                       availableItems.removeWhere((availableItem) => availableItem['name'] == item.data['name']);
                     });
                   },
@@ -127,7 +139,6 @@ class _BuildYourPCState extends State<BuildYourPC> {
                     );
                   },
                 ),
-
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -146,91 +157,64 @@ class _BuildYourPCState extends State<BuildYourPC> {
               ],
             ),
           ),
-          // Área para los dragitems
           Expanded(
             child: ListView(
               children: categoriesList.map((category) {
                 List<Map<String, dynamic>> itemsInCategory = categories[category] ?? [];
 
-                return Container(
-                  padding: const EdgeInsets.all(8.0),
+                return Card(
                   color: Colors.grey[800],
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        category,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                  child: ExpansionTile(
+                    title: Text(
+                      category,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      SizedBox(
-                        height: 300, // Aumentar la altura para permitir una mejor visualización de las tarjetas
-                        child: GridView.builder(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, // Número de columnas por categoría
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            childAspectRatio: 0.75, // Ajusta la relación de aspecto de los ítems
-                          ),
-                          itemCount: itemsInCategory.length,
-                          itemBuilder: (context, itemIndex) {
-                            var item = itemsInCategory[itemIndex];
-                            return Draggable<Map<String, dynamic>>(
-                              data: item,
-                              feedback: Material(
-                                color: Colors.grey[800],
-                                child: Card(
-                                  color: Colors.grey[850],
-                                  elevation: 4,
-                                  margin: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (item['image'] != null) 
-                                        Image.asset(
-                                          item['image'] ?? 'assets/images/componenteprueba.png',
-                                          width: 80,
-                                          height: 80,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          item['name'] ?? 'No name',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        '\$${item['price'] ?? '0'}',
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.white60,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                    ),
+                    iconColor: Colors.yellowAccent,
+                    expandedAlignment: Alignment.centerLeft,
+                    initiallyExpanded: true, //False para que inicie colapsado
+                    children: [
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 0.65,
+                        ),
+                        itemCount: itemsInCategory.length,
+                        itemBuilder: (context, itemIndex) {
+                          var item = itemsInCategory[itemIndex];
+                          return Draggable<Map<String, dynamic>>(
+                            data: item,
+                            feedback: Material(
+                              color: Colors.grey[800],
                               child: Card(
                                 color: Colors.grey[850],
                                 elevation: 4,
                                 margin: const EdgeInsets.all(8.0),
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     if (item['image'] != null) 
-                                      Image.asset(
-                                        item['image'] ?? 'assets/images/componenteprueba.png',
+                                      Image.network(
+                                        item['image'],
                                         width: 80,
                                         height: 80,
                                         fit: BoxFit.cover,
+                                        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                                          return Image.asset(
+                                            'assets/images/componenteprueba.png',
+                                            width: 80,
+                                            height: 80,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
                                       ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -253,9 +237,53 @@ class _BuildYourPCState extends State<BuildYourPC> {
                                   ],
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                            child: Card(
+                              color: Colors.grey[850],
+                              elevation: 4,
+                              margin: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (item['image'] != null) 
+                                    Image.network(
+                                      item['image'],
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                                        return Image.asset(
+                                          'assets/images/componenteprueba.png',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['name'] ?? 'No name',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '\$${item['price'] ?? '0'}',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white60,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

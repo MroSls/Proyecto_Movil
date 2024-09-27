@@ -7,11 +7,14 @@ class GPUViewModel extends ChangeNotifier {
   List<GPU> _GPUs = [];
   bool _isLoading = false;
 
+  // Getters para obtener la lista de GPUs y el estado de carga
   List<GPU> get GPUs => _GPUs;
   bool get isLoading => _isLoading;
 
+  // Método para obtener las GPUs
   Future<void> fetchGPUs() async {
-    if (_GPUs.isNotEmpty) return;
+    if (_GPUs.isNotEmpty) return; // Evita hacer la solicitud si ya hay datos
+
     _isLoading = true;
     notifyListeners();
 
