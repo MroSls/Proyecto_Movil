@@ -1,28 +1,29 @@
 class RAM {
-  String url_image;
-  String name;
-  String brand;
-  String type;
-  int capacity;
-  int speed;
-  Compatibility compatibility;
-  String url;
-  int price;
+  final String urlImage;
+  final String name;
+  final String brand;
+  final String type;
+  final int capacity;
+  final int speed;
+  final Compatibility compatibility;
+  final String url;
+  final int price;
 
-  RAM(
-      {required this.url_image,
-      required this.name,
-      required this.brand,
-      required this.type,
-      required this.capacity,
-      required this.speed,
-      required this.compatibility,
-      required this.url,
-      required this.price});
+  RAM({
+    required this.urlImage,
+    required this.name,
+    required this.brand,
+    required this.type,
+    required this.capacity,
+    required this.speed,
+    required this.compatibility,
+    required this.url,
+    required this.price
+  });
 
   factory RAM.fromJson(Map<String, dynamic> json) {
     return RAM(
-      url_image: json['url_image'],
+      urlImage: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       type: json['type'],
@@ -30,7 +31,7 @@ class RAM {
       speed: json['speed'],
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
-      price: json['price'],
+      price: json['price']
     );
   }
 }

@@ -1,14 +1,14 @@
 class Motherboard {
-  String url_image;
-  String name;
-  String brand;
-  String socket;
-  Compatibility compatibility;
-  String url;
-  int price;
+  final String urlImage;
+  final String name;
+  final String brand;
+  final String socket;
+  final Compatibility compatibility;
+  final String url;
+  final int price;
 
   Motherboard({
-    required this.url_image,
+    required this.urlImage,
     required this.name,
     required this.brand,
     required this.socket,
@@ -19,13 +19,13 @@ class Motherboard {
 
   factory Motherboard.fromJson(Map<String, dynamic> json) {
     return Motherboard(
-      url_image: json['url_image'],
+      urlImage: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       socket: json['socket'],
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
-      price: json['price'],
+      price: json['price']
     );
   }
 }
@@ -49,13 +49,13 @@ class Compatibility {
 
   factory Compatibility.fromJson(Map<String, dynamic> json) {
     return Compatibility(
-      ramType: json['ramType'],
-      pciVersion: json['pciVersion'],
-      cpuCompatibility: json['cpuCompatibility'],
-      gpuCompatibility: json['gpuCompatibility'],
+      ramType: json['ram_type'],
+      pciVersion: json['pci_version'],
+      cpuCompatibility: json['cpu_compatibility'],
+      gpuCompatibility: json['gpu_compatibility'],
       storageCompatibility:
-          StorageCompatibility.fromJson(json['storageCompatibility']),
-      psuPower: json['psuPower'],
+          StorageCompatibility.fromJson(json['storage_compatibility']),
+      psuPower: json['psu_power'],
     );
   }
 }

@@ -1,14 +1,16 @@
 class Cooler {
-  String name;
-  String brand;
-  String type;
-  int fanSizeMm;
-  int noiseLevel;
-  Compatibility compatibility;
-  String url;
-  int price;
+  final String urlImage;
+  final String name;
+  final String brand;
+  final String type;
+  final int fanSizeMm;
+  final int noiseLevel;
+  final Compatibility compatibility;
+  final String url;
+  final int price;
 
   Cooler({
+    required this.urlImage,
     required this.name,
     required this.brand,
     required this.type,
@@ -21,11 +23,12 @@ class Cooler {
 
   factory Cooler.fromJson(Map<String, dynamic> json) {
     return Cooler(
+      urlImage: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       type: json['type'],
-      fanSizeMm: json['fanSizeMm'],
-      noiseLevel: json['noiseLevel'],
+      fanSizeMm: json['fan_size_mm'],
+      noiseLevel: json['noise_level'],
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
       price: json['price'],

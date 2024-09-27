@@ -1,36 +1,27 @@
 class Storage {
-  String url_image;
   String name;
   String brand;
   String type;
   int capacity;
   int speed;
   Compatibility compatibility;
-  String url;
-  int price;
 
   Storage({
-    required this.url_image,
     required this.name,
     required this.brand,
     required this.type,
     required this.capacity,
     required this.speed,
     required this.compatibility,
-    required this.url,
-    required this.price,
   });
   factory Storage.fromJson(Map<String, dynamic> json) {
     return Storage(
-      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       type: json['type'],
       capacity: json['capacity'],
       speed: json['speed'],
       compatibility: Compatibility.fromJson(json['compatibility']),
-      url: json['url'],
-      price: json['price'],
     );
   }
 }

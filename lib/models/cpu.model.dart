@@ -1,16 +1,17 @@
 class CPU {
-  String url_image;
-  String name;
-  String brand;
-  String socket;
-  int cores;
-  int threads;
-  double clockSpeed;
-  double price;
-  Compatibility compatibility;
-  String url;
+  final String urlImage;
+  final String name;
+  final String brand;
+  final String socket;
+  final int cores;
+  final int threads;
+  final double clockSpeed;
+  final double price;
+  final Compatibility compatibility;
+  final String url;
+
   CPU({
-    required this.url_image,
+    required this.urlImage,
     required this.name,
     required this.brand,
     required this.socket,
@@ -19,12 +20,12 @@ class CPU {
     required this.clockSpeed,
     required this.price,
     required this.compatibility,
-    required this.url,
+    required this.url
   });
 
   factory CPU.fromJson(Map<String, dynamic> json) {
     return CPU(
-      url_image: json['url_image'],
+      urlImage: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       socket: json['socket'],
@@ -33,11 +34,11 @@ class CPU {
       clockSpeed: (json['clock_speed'] is int)
           ? (json['clock_speed'] as int).toDouble()
           : json['clock_speed'].toDouble(),
-      price: (json['price'] is int)
-          ? (json['price'] as int).toDouble()
-          : json['price'].toDouble(),
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
+      price: (json['price'] is int)
+          ? (json['price'] as int).toDouble()
+          : json['price'].toDouble()
     );
   }
 }

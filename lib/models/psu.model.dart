@@ -1,16 +1,16 @@
 class PSU {
-  String url_image;
-  String name;
-  String brand;
-  int wattage;
-  String efficiencyRating;
-  bool modular;
-  Compatibility compatibility;
-  String url;
-  int price;
+  final String urlImage;
+  final String name;
+  final String brand;
+  final int wattage;
+  final String efficiencyRating;
+  final bool modular;
+  final Compatibility compatibility;
+  final String url;
+  final int price;
 
   PSU({
-    required this.url_image,
+    required this.urlImage,
     required this.name,
     required this.brand,
     required this.wattage,
@@ -18,11 +18,12 @@ class PSU {
     required this.modular,
     required this.compatibility,
     required this.url,
-    required this.price,
+    required this.price
   });
+
   factory PSU.fromJson(Map<String, dynamic> json) {
     return PSU(
-      url_image: json['url_image'],
+      urlImage: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       wattage: json['wattage'],
@@ -30,7 +31,7 @@ class PSU {
       modular: json['modular'],
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
-      price: json['price'],
+      price: json['price']
     );
   }
 }
