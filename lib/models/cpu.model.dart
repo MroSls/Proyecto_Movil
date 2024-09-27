@@ -5,6 +5,7 @@ class CPU {
   int cores;
   int threads;
   double clockSpeed;
+  double price;
   Compatibility compatibility;
 
   CPU({
@@ -14,6 +15,7 @@ class CPU {
     required this.cores,
     required this.threads,
     required this.clockSpeed,
+    required this.price,
     required this.compatibility,
   });
 
@@ -24,7 +26,12 @@ class CPU {
       socket: json['socket'],
       cores: json['cores'],
       threads: json['threads'],
-      clockSpeed: json['clock_speed'],
+      clockSpeed: (json['clock_speed'] is int)
+          ? (json['clock_speed'] as int).toDouble()
+          : json['clock_speed'].toDouble(),
+      price: (json['price'] is int)
+          ? (json['price'] as int).toDouble()
+          : json['price'].toDouble(),
       compatibility: Compatibility.fromJson(json['compatibility']),
     );
   }
@@ -42,7 +49,9 @@ class Compatibility {
   factory Compatibility.fromJson(Map<String, dynamic> json) {
     return Compatibility(
       motherboardSocket: json['motherboard_socket'],
-      gpuPerformanceThreshold: json['gpu_performance_threshold'],
+      gpuPerformanceThreshold: (json['gpu_performance_threshold'] is int)
+          ? (json['gpu_performance_threshold'] as int).toDouble()
+          : json['gpu_performance_threshold'].toDouble(),
     );
   }
 }

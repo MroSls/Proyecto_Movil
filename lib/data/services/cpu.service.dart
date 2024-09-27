@@ -16,11 +16,11 @@ class CpuService {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseJson = jsonDecode(response.body);
 
-      if (responseJson['CPUs'] is List) {
-        List<dynamic> data = responseJson['CPUs'];
+      if (responseJson['cpus'] is List) {
+        List<dynamic> data = responseJson['cpus'];
         return data.map((item) => CPU.fromJson(item)).toList();
       } else {
-        throw Exception('El campo "CPUs" no es una lista.');
+        throw Exception('El campo "cpus" no es una lista.');
       }
     } else {
       throw Exception('Error al cargar los CPUs: ${response.statusCode}');
