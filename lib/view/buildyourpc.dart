@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../data/services/cpu.service.dart';
+import '../models/cpu.model.dart';
+import '../viewModel/cpu.viewModel.dart';
 
 class BuildYourPC extends StatefulWidget {
   const BuildYourPC({super.key});
@@ -9,7 +12,8 @@ class BuildYourPC extends StatefulWidget {
 
 class _BuildYourPCState extends State<BuildYourPC> {
   double totalPrice = 0.0;
-  final Map<String, Map<String, dynamic>?> activeItems = {}; // Para rastrear ítems activos por categoría
+  final Map<String, Map<String, dynamic>?> activeItems = {};
+  final CPUViewModel cpuViewModel = CPUViewModel();
 
   // Definir las categorías iniciales
   final List<String> categoriesList = [
@@ -23,24 +27,27 @@ class _BuildYourPCState extends State<BuildYourPC> {
   ];
 
   // Items disponibles para arrastrar
-  final List<Map<String, dynamic>> availableItems = [
-    {'name': 'CPU 1', 'price': '200', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'CPU 1', 'price': '200', 'category': 'APU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'CPU 2', 'price': '250', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'CPU 3', 'price': '500', 'category': 'CPU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'GPU 1', 'price': '500', 'category': 'GPU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'GPU 2', 'price': '600', 'category': 'GPU', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Motherboard 1', 'price': '150', 'category': 'Tarjeta Madre', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Motherboard 2', 'price': '200', 'category': 'Tarjeta Madre', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'RAM 1', 'price': '80', 'category': 'RAM', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'RAM 2', 'price': '120', 'category': 'RAM', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'SSD 1TB', 'price': '100', 'category': 'Almacenamiento', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'HDD 2TB', 'price': '80', 'category': 'Almacenamiento', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Power Supply 500W', 'price': '60', 'category': 'Fuente de Poder', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Power Supply 750W', 'price': '80', 'category': 'Fuente de Poder', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Cooler 1', 'price': '120', 'category': 'Refrigeración Líquida', 'image': 'assets/images/componenteprueba.png'},
-    {'name': 'Cooler 2', 'price': '150', 'category': 'Refrigeración Líquida', 'image': 'assets/images/componenteprueba.png'},
-  ];
+  List<Map<String, dynamic>> availableItems = []; // Inicializa como lista vacía
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCPUs();
+  }
+
+  Future<void> fetchCPUs() async {
+    await cpuViewModel.fetchCPUs(); // Carga los CPUs
+    setState(() {
+      availableItems = cpuViewModel.CPUs.map((cpu) {
+        return {
+          'name': cpu.name,
+          'price': cpu.price,
+          'category': 'CPU',
+          'image': 'assets/images/componenteprueba.png', // Ruta de la imagen
+        };
+      }).toList();
+    });
+  }
 
   // Generar las categorías basadas en los ítems disponibles
   Map<String, List<Map<String, dynamic>>> get categories {
@@ -85,7 +92,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
           Container(
             color: Colors.grey[850],
             padding: const EdgeInsets.all(16.0),
-            margin: EdgeInsets.zero, // Eliminado el margen para evitar el marco blanco
+            margin: EdgeInsets.zero,
             height: MediaQuery.of(context).size.height * 0.3,
             child: Stack(
               children: [
@@ -97,14 +104,16 @@ class _BuildYourPCState extends State<BuildYourPC> {
                       // Restar el precio del ítem anterior, si existe
                       if (activeItems.containsKey(category)) {
                         var previousItem = activeItems[category]!;
-                        totalPrice -= double.parse(previousItem['price']);
-                        availableItems.add(previousItem);
+                        totalPrice -= double.parse(previousItem['price'].toString());
+                        availableItems.add(previousItem); // Devuelve el ítem a la lista de disponibles
                       }
 
                       // Agregar el nuevo ítem y sumar su precio
-                      activeItems[category] = item.data as Map<String, dynamic>?;
-                      totalPrice += double.parse(item.data['price']);
-                      availableItems.remove(item);
+                      activeItems[category] = item.data; // Guardar el nuevo ítem
+                      totalPrice += double.parse(item.data['price'].toString());
+
+                      // Eliminar el ítem de la lista de disponibles
+                      availableItems.removeWhere((availableItem) => availableItem['name'] == item.data['name']);
                     });
                   },
                   builder: (context, candidateData, rejectedData) {
@@ -118,6 +127,7 @@ class _BuildYourPCState extends State<BuildYourPC> {
                     );
                   },
                 ),
+
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -181,10 +191,10 @@ class _BuildYourPCState extends State<BuildYourPC> {
                                     children: [
                                       if (item['image'] != null) 
                                         Image.asset(
-                                          item['image'] ?? 'assets/images/componenteprueba.png', // Imagen del componente
-                                          width: 80, // Ancho de la imagen
-                                          height: 80, // Alto de la imagen
-                                          fit: BoxFit.cover, // Ajustar la imagen dentro del contenedor
+                                          item['image'] ?? 'assets/images/componenteprueba.png',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.cover,
                                         ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -217,10 +227,10 @@ class _BuildYourPCState extends State<BuildYourPC> {
                                   children: [
                                     if (item['image'] != null) 
                                       Image.asset(
-                                        item['image'] ?? 'assets/images/componenteprueba.png', // Imagen del componente
-                                        width: 80, // Ancho de la imagen
-                                        height: 80, // Alto de la imagen
-                                        fit: BoxFit.cover, // Ajustar la imagen dentro del contenedor
+                                        item['image'] ?? 'assets/images/componenteprueba.png',
+                                        width: 80,
+                                        height: 80,
+                                        fit: BoxFit.cover,
                                       ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
