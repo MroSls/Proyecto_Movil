@@ -54,10 +54,10 @@ class _BuildYourPCState extends State<BuildYourPC> {
       setState(() {
         availableItems.addAll(gpuViewModel.GPUs.map((gpu) {
           return {
-            'name': gpu.name ?? 'Unknown',
-            'price': gpu.price ?? 0.0,
+            'name': gpu.name,
+            'price': gpu.price,
             'category': 'GPU',
-            'image': gpu.url_image ?? 'default_image_url',
+            'image': gpu.url_image,
           };
         }).toList());
       });
