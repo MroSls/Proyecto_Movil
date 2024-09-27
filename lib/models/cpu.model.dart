@@ -1,4 +1,5 @@
 class CPU {
+  String url_image;
   String name;
   String brand;
   String socket;
@@ -8,9 +9,8 @@ class CPU {
   double price;
   Compatibility compatibility;
   String url;
-  int price;
-
   CPU({
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.socket,
@@ -20,11 +20,11 @@ class CPU {
     required this.price,
     required this.compatibility,
     required this.url,
-    required this.price,
   });
 
   factory CPU.fromJson(Map<String, dynamic> json) {
     return CPU(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       socket: json['socket'],
@@ -38,7 +38,6 @@ class CPU {
           : json['price'].toDouble(),
       compatibility: Compatibility.fromJson(json['compatibility']),
       url: json['url'],
-      price: json['price'],
     );
   }
 }

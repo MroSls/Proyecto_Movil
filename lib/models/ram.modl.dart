@@ -1,4 +1,5 @@
 class RAM {
+  String url_image;
   String name;
   String brand;
   String type;
@@ -9,7 +10,8 @@ class RAM {
   int price;
 
   RAM(
-      {required this.name,
+      {required this.url_image,
+      required this.name,
       required this.brand,
       required this.type,
       required this.capacity,
@@ -20,6 +22,7 @@ class RAM {
 
   factory RAM.fromJson(Map<String, dynamic> json) {
     return RAM(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       type: json['type'],

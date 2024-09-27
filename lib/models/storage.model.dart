@@ -1,4 +1,5 @@
 class Storage {
+  String url_image;
   String name;
   String brand;
   String type;
@@ -9,6 +10,7 @@ class Storage {
   int price;
 
   Storage({
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.type,
@@ -20,6 +22,7 @@ class Storage {
   });
   factory Storage.fromJson(Map<String, dynamic> json) {
     return Storage(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       type: json['type'],

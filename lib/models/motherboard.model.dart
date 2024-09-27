@@ -1,4 +1,5 @@
 class Motherboard {
+  String url_image;
   String name;
   String brand;
   String socket;
@@ -7,6 +8,7 @@ class Motherboard {
   int price;
 
   Motherboard({
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.socket,
@@ -17,6 +19,7 @@ class Motherboard {
 
   factory Motherboard.fromJson(Map<String, dynamic> json) {
     return Motherboard(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       socket: json['socket'],

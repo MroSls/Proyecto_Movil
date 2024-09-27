@@ -1,4 +1,5 @@
 class PSU {
+  String url_image;
   String name;
   String brand;
   int wattage;
@@ -9,6 +10,7 @@ class PSU {
   int price;
 
   PSU({
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.wattage,
@@ -20,6 +22,7 @@ class PSU {
   });
   factory PSU.fromJson(Map<String, dynamic> json) {
     return PSU(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       wattage: json['wattage'],

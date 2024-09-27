@@ -1,4 +1,5 @@
 class GPU {
+  String url_image;
   String name;
   String brand;
   String chipset;
@@ -10,6 +11,7 @@ class GPU {
   String url;
   int price;
   GPU({
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.chipset,
@@ -23,6 +25,7 @@ class GPU {
   });
   factory GPU.fromJson(Map<String, dynamic> json) {
     return GPU(
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       chipset: json['chipset'],
