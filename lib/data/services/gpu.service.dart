@@ -6,6 +6,7 @@ import '../../models/gpu.model.dart';
 class GpuService {
   final String endpoint = 'https://proyecto-movil-6fkk.onrender.com/api/gpu';
   final AuthToken authToken = AuthToken();
+
   Future<List<GPU>> fetchGPUs() async {
     String? token = await authToken.fetchToken();
     final response = await http.get(Uri.parse(endpoint), headers: {
@@ -13,14 +14,12 @@ class GpuService {
     });
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseJson = jsonDecode(response.body);
+      final responseBody = response.body;
 
-      if (responseJson['GPUs'] is List) {
-        List<dynamic> data = responseJson['GPUs'];
-        return data.map((item) => GPU.fromJson(item)).toList();
-      } else {
-        throw Exception('El campo "GPUs" no es una lista.');
-      }
+      final Map<String, dynamic> responseJson = jsonDecode(responseBody);
+      // Asegúrate de que 'gpus' sea una lista
+      List<dynamic> data = List<dynamic>.from(responseJson['gpus'] ?? []);
+      return data.map((item) => GPU.fromJson(item)).toList();
     } else {
       throw Exception('Error al cargar los GPUs: ${response.statusCode}');
     }

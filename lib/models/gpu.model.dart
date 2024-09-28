@@ -1,18 +1,18 @@
 class GPU {
-  final String urlImage;
-  final String name;
-  final String brand;
-  final String chipset;
-  final String memory;
-  final String pciVersion;
-  final int powerConsumption;
-  final int lengthMm;
-  final Compatibility compatibility;
-  final String url;
-  final int price;
+  String url_image;
+  String name;
+  String brand;
+  String chipset;
+  String memory;
+  String pciVersion;
+  int powerConsumption;
+  int lengthMm;
+  Compatibility compatibility;
+  String url;
+  int price;
 
   GPU({
-    required this.urlImage,
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.chipset,
@@ -27,17 +27,17 @@ class GPU {
 
   factory GPU.fromJson(Map<String, dynamic> json) {
     return GPU(
-      urlImage: json['url_image'],
-      name: json['name'],
-      brand: json['brand'],
-      chipset: json['chipset'],
-      memory: json['memory'],
-      pciVersion: json['pci_version'],
-      powerConsumption: json['power_consumption'],
-      lengthMm: json['length_mm'],
-      compatibility: Compatibility.fromJson(json['compatibility']),
-      url: json['url'],
-      price: json['url_image'],
+      url_image: json['url_image'] ?? 'default_image_url', 
+      name: json['name'] ?? 'Unknown', 
+      brand: json['brand'] ?? 'Unknown', 
+      chipset: json['chipset'] ?? 'Unknown', 
+      memory: json['memory'] ?? 'Unknown', 
+      pciVersion: json['pciVersion'] ?? 'Unknown', 
+      powerConsumption: json['powerConsumption'] ?? 0, 
+      lengthMm: json['lengthMm'] ?? 0, 
+      compatibility: Compatibility.fromJson(json['compatibility'] ?? {}), // Manejo de nulos
+      url: json['url'] ?? 'https://default-url.com', 
+      price: json['price'] ?? 0, 
     );
   }
 }
@@ -50,10 +50,11 @@ class Compatibility {
     required this.cpuCompatibility,
     required this.cpuPerformanceThreshold,
   });
+
   factory Compatibility.fromJson(Map<String, dynamic> json) {
     return Compatibility(
-      cpuCompatibility: json['cpu_compatibility'],
-      cpuPerformanceThreshold: json['cpu_performance_threshold'],
+      cpuCompatibility: json['cpuCompatibility'] ?? 'Unknown', 
+      cpuPerformanceThreshold: json['cpuPerformanceThreshold'] ?? 'Unknown', 
     );
   }
 }

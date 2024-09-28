@@ -1,5 +1,5 @@
 class CPU {
-  final String urlImage;
+  final String url_image;
   final String name;
   final String brand;
   final String socket;
@@ -11,7 +11,7 @@ class CPU {
   final String url;
 
   CPU({
-    required this.urlImage,
+    required this.url_image,
     required this.name,
     required this.brand,
     required this.socket,
@@ -25,7 +25,7 @@ class CPU {
 
   factory CPU.fromJson(Map<String, dynamic> json) {
     return CPU(
-      urlImage: json['url_image'],
+      url_image: json['url_image'],
       name: json['name'],
       brand: json['brand'],
       socket: json['socket'],
