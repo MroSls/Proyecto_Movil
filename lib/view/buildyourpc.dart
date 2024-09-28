@@ -22,7 +22,8 @@ class _BuildYourPCState extends State<BuildYourPC> {
     'RAM',
     'Almacenamiento',
     'Fuente de Poder',
-    'Refrigeración Líquida',
+    'Refrigeración',
+    'Gabinete',
   ];
 
   List<Map<String, dynamic>> availableItems = [];
