@@ -5,6 +5,7 @@ import '../viewModel/assembledPC.viewModel.dart';
 import 'components.dart';
 
 class AssembledPCView extends StatefulWidget {
+
   const AssembledPCView({super.key});
 
   @override
@@ -53,11 +54,12 @@ class AssembledPCViewState extends State<AssembledPCView> {
               itemCount: viewModel.assembledPCs.length,
               itemBuilder: (context, index) {
                 final assembledPC = viewModel.assembledPCs[index];
+                
                 return GestureDetector(
                   onTap: () => _navigateToDetail(assembledPC),
                   child: Card(
                     elevation: 5,
-                    color: Colors.grey[850],
+                    color: Colors.grey[850], // contenedor texto pc
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -111,6 +113,18 @@ class AssembledPCViewState extends State<AssembledPCView> {
   }
 
   void _navigateToDetail(AssembledPC assembledPC) {
+
+    final List<Map<String, String>> componentDetails = [
+      {'label': 'Wifi', 'details': assembledPC.wifi ? 'Cuenta con antena WiFi' : 'No cuenta con antena WiFi'},
+      {'label': 'Color', 'details': assembledPC.color},
+      {'label': 'Almacenamiento', 'details': '- ${assembledPC.storageMedia.totalStorageCapacity} \n- Cuenta con ${assembledPC.storageMedia.storageUnitsInstalled} ${(int.parse(assembledPC.storageMedia.storageUnitsInstalled) < 2) ? 'unidad' : 'unidades'} de almacenamiento ${assembledPC.storageMedia.storageUnit}'},
+      {'label': 'RAM', 'details': '${assembledPC.memory.memoryRam} a una velocidad de ${assembledPC.memory.memoryVelocity}'},
+      {'label': 'Fuente de Poder', 'details': assembledPC.powerSuppy},
+      {'label': 'Sistema Operativo', 'details': assembledPC.software},
+      {'label': 'CPU', 'details': 'Tiene un procesador ${assembledPC.cpu.cpuFamily} ${assembledPC.cpu.cpuModel} de ${assembledPC.cpu.cpuCores} nucleos con ${assembledPC.cpu.cpu} de frecuencia hasta un maximo de ${assembledPC.cpu.cpuTurboFrecuency}'},
+      {'label': 'GPU', 'details': 'Tiene una tarjeta ${assembledPC.gpu.gpuName} modelo ${assembledPC.gpu.gpuDiscreteModel}'},
+    ];
+  
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -118,6 +132,7 @@ class AssembledPCViewState extends State<AssembledPCView> {
           imagePath: assembledPC.urlImage.isNotEmpty ? assembledPC.urlImage[0] : '',
           title: assembledPC.namePC,
           description: assembledPC.software,
+          componentDetails: componentDetails,
         ),
       ),
     );
