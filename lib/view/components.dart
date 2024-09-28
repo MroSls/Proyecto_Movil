@@ -4,28 +4,18 @@ class Components extends StatelessWidget {
   final String imagePath;
   final String title;
   final String description;
+  final List<Map<String, String>> componentDetails;
 
   const Components({
     required this.imagePath,
     required this.title,
     required this.description,
+    required this.componentDetails,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Lista de etiquetas para los componentes de PC
-    final List<Map<String, String>> componentDetails = [
-      {'label': 'CPU', 'details': 'Información detallada sobre CPU'},
-      {'label': 'GPU', 'details': 'Información detallada sobre GPU'},
-      {'label': 'Motherboard', 'details': 'Información detallada sobre Motherboard'},
-      {'label': 'Gabinete', 'details': 'Información detallada sobre Gabinete'},
-      {'label': 'RAM', 'details': 'Información detallada sobre RAM'},
-      {'label': 'Almacenamiento', 'details': 'Información detallada sobre Almacenamiento'},
-      {'label': 'Fuente de Poder', 'details': 'Información detallada sobre Fuente de Poder'},
-      {'label': 'Sistema de Refrigeración', 'details': 'Información detallada sobre Sistema de Refrigeración'},
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
