@@ -23,10 +23,9 @@ class MyApp extends StatelessWidget {
         routes: {
           '/assembledPC.view': (context) => const AssembledPCView(),
           '/components': (context) => const Components(
-            imagePath: '',
             title: '',
-            description: '',
             componentDetails: [],
+            url: '',
           ),
           '/buildyourpc': (context) => const BuildYourPC(),
         },
