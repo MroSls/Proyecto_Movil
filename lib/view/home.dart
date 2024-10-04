@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../viewModel/assembledPC.viewModel.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> labels = ['pc gamer', 'pc escolar', 'pc oficina', 'armar pc'];
+    final List<String> labels = [
+      'pc gamer',
+      'pc escolar',
+      'pc oficina',
+      'armar pc'
+    ];
+    final List<String> category = [
+      'Gamer',
+      'School',
+      'Office',
+    ];
     final List<List<String>> images = [
       ['assets/images/gamer1.png', 'assets/images/gamer2.png'], // pc gamer
       [], // pc escolar (sin imágenes)
-      ['assets/images/oficina1.png', 'assets/images/oficina2.png'], // pc oficina
+      [
+        'assets/images/oficina1.png',
+        'assets/images/oficina2.png'
+      ], // pc oficina
       ['assets/images/pcbuild.png', 'assets/images/pcbuild2.png'], // armar pc
     ];
 
@@ -36,7 +51,11 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 if (labels[index] == 'armar pc') {
                   Navigator.pushNamed(context, '/buildyourpc');
-                } else {
+                } else if (['pc gamer', 'pc escolar', 'pc oficina']
+                    .contains(labels[index])) {
+                  Provider.of<AssembledPCViewModel>(context, listen: false)
+                      .setCategory(category[index]);
+
                   Navigator.pushNamed(context, '/assembledPC.view');
                 }
               },
